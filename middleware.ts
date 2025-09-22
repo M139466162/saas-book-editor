@@ -20,8 +20,12 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const path = req.nextUrl.pathname
         // public routes
-        const publicPaths = ['/', '/login', '/signup', '/page-public']
+        const publicPaths = ['/login', '/signup', '/page-public']
         if (publicPaths.includes(path)) return true
+        // Redirect anonymous from / to landing
+        if (!token && path === '/') {
+          return false
+        }
         return !!token
       },
     },

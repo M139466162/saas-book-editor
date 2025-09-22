@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, Search, BookOpen, Command, Sparkles, Zap } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useBooksStore } from '@/lib/store'
+import { useBooks } from '@/lib/hooks/useBooks'
 import { generateUUID } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 import { Skeleton, SkeletonText } from '@/components/ui/Skeleton'
@@ -21,7 +21,7 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [showQuickGenerator, setShowQuickGenerator] = useState(false)
   
-  const { books, addBook } = useBooksStore()
+  const { data: books = [], isLoading } = useBooks()
   const { open: commandPaletteOpen, setOpen: setCommandPaletteOpen } = useCommandPalette()
 
   const filteredBooks = books.filter(book =>
@@ -145,7 +145,13 @@ export default function HomePage() {
 
       {/* Main Content */}
       <ContentContainer>
-        {books.length === 0 && !searchQuery ? (
+        {isLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <BookCardSkeleton key={i} />
+            ))}
+          </div>
+        ) : books.length === 0 && !searchQuery ? (
           <EmptyState />
         ) : (
           <>

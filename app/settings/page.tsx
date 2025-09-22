@@ -16,10 +16,13 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Card } from '@/components/ui/Card'
 import { useSettingsStore } from '@/lib/store'
+import { useSession } from 'next-auth/react'
 
 export default function SettingsPage() {
   const router = useRouter()
   const { updateSettings, ...settings } = useSettingsStore()
+  const { data: session } = useSession()
+  const role = (session?.user as any)?.role || 'user'
   
   const [openRouterKey, setOpenRouterKey] = useState(settings.openRouterApiKey || '')
   const [sunraApiKey, setSunraApiKey] = useState(settings.sunraApiKey || '')
@@ -110,7 +113,7 @@ export default function SettingsPage() {
               Back to Dashboard
             </Button>
             
-            <h1 className="text-xl font-semibold text-foreground">Settings</h1>
+            <h1 className="text-xl font-semibold text-foreground">Paramètres</h1>
           </div>
 
           <Button onClick={handleSave} className="gap-2">
@@ -123,8 +126,36 @@ export default function SettingsPage() {
       {/* Main Content */}
       <div className="max-w-4xl mx-auto p-6">
         <div className="space-y-8">
+          {/* User Profile & Plan (visible to all) */}
+          <div>
+            <h2 className="text-lg font-semibold text-foreground mb-4">Profil</h2>
+            <Card className="p-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm text-text-secondary mb-2">Email</label>
+                  <Input defaultValue={session?.user?.email || ''} disabled />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-2">Nom</label>
+                  <Input defaultValue={(session?.user as any)?.name || ''} disabled />
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-2">Plan</label>
+                  <select className="input w-full">
+                    <option>Free</option>
+                    <option>Pro</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm text-text-secondary mb-2">Modèle IA préféré</label>
+                  <Input placeholder="ex: deepseek/deepseek-r1-distill-llama-70b" />
+                </div>
+              </div>
+            </Card>
+          </div>
           
-          {/* API Keys Section */}
+          {/* API Keys Section (admins only) */}
+          {role === 'admin' && (
           <div>
             <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
               <Key className="w-5 h-5" />
@@ -293,6 +324,7 @@ export default function SettingsPage() {
               </Card>
             </div>
           </div>
+          )}
 
           {/* Usage Information */}
           <div>
