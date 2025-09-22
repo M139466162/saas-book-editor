@@ -72,7 +72,7 @@ export default function BookEditorPage() {
     <div className="h-screen bg-gray-50 flex flex-col">
       {/* Modern Header with Canva-style design */}
       <motion.header 
-        className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm"
+  className="bg-surface border-b border-border px-6 py-4 shadow-sm"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
       >

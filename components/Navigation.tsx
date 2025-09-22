@@ -49,7 +49,7 @@ export function Navigation() {
               className="flex items-center gap-2 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-panel transition-colors"
             >
               <Settings className="w-4 h-4" />
-              <span className="hidden sm:inline">Settings</span>
+              <span className="hidden sm:inline">Paramètres</span>
             </Link>
             {mounted && (
               <button

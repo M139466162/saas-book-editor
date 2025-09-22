@@ -5,7 +5,7 @@ export async function POST(request: NextRequest) {
     const { apiKey } = await request.json();
     
     if (!apiKey) {
-      return NextResponse.json({ error: 'API key is required' }, { status: 400 });
+      return NextResponse.json({ success: false, error: 'API key is required' }, { status: 200 });
     }
 
     // Test connection to Sunra AI
@@ -20,10 +20,10 @@ export async function POST(request: NextRequest) {
     if (response.ok) {
       return NextResponse.json({ success: true });
     } else {
-      return NextResponse.json({ error: 'Invalid API key' }, { status: 401 });
+      return NextResponse.json({ success: false, error: 'Invalid API key', status: response.status }, { status: 200 });
     }
   } catch (error) {
     console.error('Sunra AI test error:', error);
-    return NextResponse.json({ error: 'Connection failed' }, { status: 500 });
+    return NextResponse.json({ success: false, error: 'Connection failed' }, { status: 200 });
   }
 }

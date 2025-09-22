@@ -44,7 +44,7 @@ export function BookPreview({ book, chapters, sections, onClose }: BookPreviewPr
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex flex-col">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+  <div className="bg-surface border-b border-border px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h2 className="text-lg font-semibold text-gray-900">
             Preview: {book.title}
@@ -84,7 +84,7 @@ export function BookPreview({ book, chapters, sections, onClose }: BookPreviewPr
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white shadow-lg"
+            className="bg-surface shadow-lg"
             style={{
               width: '210mm',
               minHeight: '297mm',

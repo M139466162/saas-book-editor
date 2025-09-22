@@ -6,41 +6,41 @@ import { ReactNode } from 'react'
 // Design System Colors & Tokens
 export const designTokens = {
   colors: {
-    // Primary Background
-    background: 'bg-gray-50',
-    surface: 'bg-white',
-    surfaceHover: 'hover:bg-gray-50',
-    panel: 'bg-gray-100',
-    
+    // Tokenized Tailwind CSS var colors (works in dark mode)
+    background: 'bg-background',
+    surface: 'bg-surface',
+    surfaceHover: 'hover:bg-surface/80',
+    panel: 'bg-panel',
+
     // Text Colors
-    textPrimary: 'text-gray-900',
-    textSecondary: 'text-gray-600',
-    textMuted: 'text-gray-500',
-    
+    textPrimary: 'text-text-primary',
+    textSecondary: 'text-text-secondary',
+    textMuted: 'text-text-muted',
+
     // Borders
-    border: 'border-gray-200',
-    borderHover: 'hover:border-gray-300',
-    
+    border: 'border-border',
+    borderHover: 'hover:border-border/80',
+
     // Accents
-    accent: 'text-blue-600',
-    accentBg: 'bg-blue-600',
-    accentHover: 'hover:bg-blue-700',
-    accentLight: 'bg-blue-50',
-    accentBorder: 'border-blue-200',
-    
-    // Status Colors
-    success: 'text-green-600',
-    successBg: 'bg-green-600',
-    successLight: 'bg-green-50',
-    error: 'text-red-600',
-    errorBg: 'bg-red-600',
-    errorLight: 'bg-red-50',
-    warning: 'text-yellow-600',
-    warningBg: 'bg-yellow-600',
-    warningLight: 'bg-yellow-50',
-    info: 'text-blue-600',
-    infoBg: 'bg-blue-600',
-    infoLight: 'bg-blue-50',
+    accent: 'text-accent',
+    accentBg: 'bg-accent',
+    accentHover: 'hover:bg-accent/90',
+    accentLight: 'bg-accent/10',
+    accentBorder: 'border-accent/30',
+
+    // Status Colors (using tonal utilities)
+    success: 'text-green-500',
+    successBg: 'bg-green-500',
+    successLight: 'bg-green-500/10',
+    error: 'text-red-500',
+    errorBg: 'bg-red-500',
+    errorLight: 'bg-red-500/10',
+    warning: 'text-yellow-500',
+    warningBg: 'bg-yellow-500',
+    warningLight: 'bg-yellow-500/10',
+    info: 'text-blue-500',
+    infoBg: 'bg-blue-500',
+    infoLight: 'bg-blue-500/10',
   },
   
   typography: {

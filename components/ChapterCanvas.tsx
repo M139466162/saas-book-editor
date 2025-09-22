@@ -49,7 +49,7 @@ export function SectionEditor({ section, onUpdate, onDelete }: SectionEditorProp
                 }
               }}
               placeholder="Section heading (optional)"
-              className="text-lg font-medium bg-transparent border-none outline-none text-foreground placeholder-muted-foreground flex-1"
+                className="text-lg font-medium bg-transparent border-none outline-none text-foreground placeholder-muted-foreground flex-1 dark:bg-gray-800 dark:text-white"
               autoFocus
             />
           ) : (

@@ -145,7 +145,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
     <div className="h-full flex flex-col bg-gray-50">
       {/* Top Toolbar */}
       <motion.div 
-        className="bg-white border-b border-gray-200 px-6 py-4 shadow-sm"
+  className="bg-surface border-b border-border px-6 py-4 shadow-sm"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.3 }}
@@ -159,7 +159,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
                 size="sm"
                 onClick={handlePrevPage}
                 disabled={currentPageIndex === 0}
-                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-white hover:shadow-sm transition-all"
+                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-surface hover:shadow-sm transition-all"
                 title="Page précédente"
               >
                 <ChevronLeft className="w-4 h-4" />
@@ -181,7 +181,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
                 size="sm"
                 onClick={handleNextPage}
                 disabled={currentPageIndex === bookChapters.length - 1}
-                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-white hover:shadow-sm transition-all"
+                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-surface hover:shadow-sm transition-all"
                 title="Page suivante"
               >
                 <ChevronRight className="w-4 h-4" />
@@ -193,7 +193,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-8 px-3 hover:bg-white hover:shadow-sm transition-all" 
+                className="h-8 px-3 hover:bg-surface hover:shadow-sm transition-all" 
                 title="Ajouter du texte"
               >
                 <Type className="w-4 h-4" />
@@ -202,7 +202,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-8 px-3 hover:bg-white hover:shadow-sm transition-all" 
+                className="h-8 px-3 hover:bg-surface hover:shadow-sm transition-all" 
                 title="Ajouter une image"
               >
                 <ImageIcon className="w-4 h-4" />
@@ -211,7 +211,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-8 px-3 hover:bg-white hover:shadow-sm transition-all" 
+                className="h-8 px-3 hover:bg-surface hover:shadow-sm transition-all" 
                 title="Ajouter une citation"
               >
                 <Quote className="w-4 h-4" />
@@ -220,7 +220,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="h-8 px-3 hover:bg-white hover:shadow-sm transition-all" 
+                className="h-8 px-3 hover:bg-surface hover:shadow-sm transition-all" 
                 title="Ajouter une liste"
               >
                 <List className="w-4 h-4" />
@@ -246,12 +246,12 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
                 size="sm" 
                 onClick={handleZoomOut}
                 disabled={zoom <= 50}
-                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-white hover:shadow-sm transition-all"
+                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-surface hover:shadow-sm transition-all"
                 title="Zoom arrière"
               >
                 <ZoomOut className="w-4 h-4" />
               </Button>
-              <div className="text-sm font-medium text-gray-700 min-w-[45px] text-center bg-white px-2 py-1 rounded border">
+              <div className="text-sm font-medium text-text-primary min-w-[45px] text-center bg-surface px-2 py-1 rounded border border-border">
                 {zoom}%
               </div>
               <Button 
@@ -259,7 +259,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
                 size="sm" 
                 onClick={handleZoomIn}
                 disabled={zoom >= 200}
-                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-white hover:shadow-sm transition-all"
+                className="h-8 w-8 p-0 disabled:opacity-30 hover:bg-surface hover:shadow-sm transition-all"
                 title="Zoom avant"
               >
                 <ZoomIn className="w-4 h-4" />
@@ -308,7 +308,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
       >
         {/* Page Thumbnails Sidebar */}
         <div className="w-72 bg-gray-50 border-r border-gray-200 flex flex-col shadow-inner">
-          <div className="p-4 bg-white border-b border-gray-200">
+          <div className="p-4 bg-surface border-b border-border">
             <h3 className="text-sm font-semibold text-gray-900 mb-1">Pages du livre</h3>
             <p className="text-xs text-gray-500">{bookChapters.length} page{bookChapters.length !== 1 ? 's' : ''}</p>
           </div>
@@ -345,7 +345,7 @@ export function CanvaPageEditor({ bookId }: CanvaPageEditorProps) {
         <div className="flex-1 overflow-auto bg-gradient-to-br from-gray-50 to-gray-100 p-8">
           <div className="flex justify-center">
             <motion.div
-              className="bg-white shadow-2xl rounded-lg overflow-hidden"
+              className="bg-surface shadow-2xl rounded-lg overflow-hidden"
               style={{
                 width: `${(210 * zoom) / 100}mm`, // A4 width
                 minHeight: `${(297 * zoom) / 100}mm`, // A4 height
@@ -420,10 +420,10 @@ function PageThumbnail({
       <div className={`p-3 rounded-xl transition-all duration-200 ${
         isSelected 
           ? 'bg-blue-50 border-2 border-blue-200 shadow-lg shadow-blue-100' 
-          : 'bg-white border-2 border-gray-200 hover:border-blue-300 hover:shadow-md'
+          : 'bg-surface border-2 border-border hover:border-accent/50 hover:shadow-md'
       }`}>
         {/* Page Preview */}
-        <div className="bg-white rounded-lg border border-gray-200 shadow-sm aspect-[210/297] p-3 mb-3 relative overflow-hidden">
+  <div className="bg-surface rounded-lg border border-border shadow-sm aspect-[210/297] p-3 mb-3 relative overflow-hidden">
           {/* Page Number Badge */}
           <div className={`absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
             isSelected 
@@ -551,7 +551,7 @@ function EditablePage({ chapter }: { chapter: Chapter }) {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
-                  className="absolute -top-12 left-0 bg-white border border-gray-200 rounded-lg shadow-lg p-2 flex items-center gap-1"
+                  className="absolute -top-12 left-0 bg-surface border border-border rounded-lg shadow-lg p-2 flex items-center gap-1"
                 >
                   <Button variant="ghost" size="sm" className="h-8 w-8 p-0" title="Gras">
                     <strong className="text-xs">B</strong>

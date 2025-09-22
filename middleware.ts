@@ -20,7 +20,7 @@ export default withAuth(
       authorized: ({ token, req }) => {
         const path = req.nextUrl.pathname
         // public routes
-        const publicPaths = ['/login']
+        const publicPaths = ['/', '/login', '/signup', '/page-public']
         if (publicPaths.includes(path)) return true
         return !!token
       },
