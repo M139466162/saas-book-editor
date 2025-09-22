@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link'
-import { Book, Library, Settings, Home, Sun, Moon } from 'lucide-react'
+import { Book, Library, Settings, Home, Sun, Moon, Palette } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
@@ -36,6 +36,13 @@ export function Navigation() {
             >
               <Library className="w-4 h-4" />
               <span className="hidden sm:inline">Templates</span>
+            </Link>
+            <Link 
+              href="/books/coloring" 
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-panel transition-colors"
+            >
+              <Palette className="w-4 h-4" />
+              <span className="hidden sm:inline">Coloriage</span>
             </Link>
             <Link 
               href="/settings" 
