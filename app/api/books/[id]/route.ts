@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { Book } from '@/lib/types';
-
-// Mock storage - in production, use proper database
-const books: Book[] = [];
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/auth';
+import { readBooks, writeBooks } from '@/lib/book-store';
 
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const book = books.find(b => b.id === params.id);
+    const session = await getServerSession(authOptions)
+    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const list = await readBooks((session.user as any).id)
+    const book = list.find(b => b.id === params.id);
     
     if (!book) {
       return NextResponse.json({ error: 'Book not found' }, { status: 404 });
@@ -26,20 +28,16 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    const session = await getServerSession(authOptions)
+    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const userId = (session.user as any).id
     const updates = await request.json();
-    const bookIndex = books.findIndex(b => b.id === params.id);
-    
-    if (bookIndex === -1) {
-      return NextResponse.json({ error: 'Book not found' }, { status: 404 });
-    }
-    
-    books[bookIndex] = {
-      ...books[bookIndex],
-      ...updates,
-      updatedAt: new Date().toISOString(),
-    };
-    
-    return NextResponse.json(books[bookIndex]);
+    const list = await readBooks(userId)
+    const idx = list.findIndex(b => b.id === params.id)
+    if (idx === -1) return NextResponse.json({ error: 'Book not found' }, { status: 404 })
+    list[idx] = { ...list[idx], ...updates, updatedAt: new Date().toISOString() }
+    await writeBooks(userId, list)
+    return NextResponse.json(list[idx]);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to update book' }, { status: 500 });
   }
@@ -50,14 +48,14 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const bookIndex = books.findIndex(b => b.id === params.id);
-    
-    if (bookIndex === -1) {
-      return NextResponse.json({ error: 'Book not found' }, { status: 404 });
-    }
-    
-    books.splice(bookIndex, 1);
-    
+    const session = await getServerSession(authOptions)
+    if (!session?.user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    const userId = (session.user as any).id
+    const list = await readBooks(userId)
+    const idx = list.findIndex(b => b.id === params.id)
+    if (idx === -1) return NextResponse.json({ error: 'Book not found' }, { status: 404 })
+    list.splice(idx, 1)
+    await writeBooks(userId, list)
     return NextResponse.json({ success: true });
   } catch (error) {
     return NextResponse.json({ error: 'Failed to delete book' }, { status: 500 });

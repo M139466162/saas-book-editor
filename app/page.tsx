@@ -12,7 +12,7 @@ import { BookCard } from '@/components/BookCard'
 import { CommandPalette, useCommandPalette } from '@/components/CommandPalette'
 import { QuickBookGenerator } from '@/components/QuickBookGenerator'
 import { PageLayout, AppHeader, ContentContainer, StyledCard, ModernButton, designTokens } from '@/components/ui/DesignSystem'
-import { ABTestCTAButtons, ABTestFeatureCards } from '@/components/ABTesting'
+// A/B testing removed; using standard UI components only
 import Link from 'next/link'
 
 export default function HomePage() {
@@ -66,19 +66,21 @@ export default function HomePage() {
         Commencez votre parcours d'écriture avec MindScribe Pro. Créez des plans, rédigez des chapitres et donnez vie à vos idées.
       </p>
 
-      {/* Tests A/B pour les boutons CTA */}
-      <ABTestCTAButtons onButtonClick={(variant) => {
-        console.log('CTA clicked:', variant)
-        // Rediriger vers la création de livre ou les templates
-        if (variant.includes('primary')) {
-          setShowQuickGenerator(true)
-        } else {
-          router.push('/templates')
-        }
-      }} />
-
-      {/* Tests A/B pour les cartes de fonctionnalités */}
-      <ABTestFeatureCards />
+      <div className="flex items-center gap-3">
+        <ModernButton 
+          variant="primary"
+          icon={<Zap className="w-4 h-4" />}
+          onClick={() => setShowQuickGenerator(true)}
+        >
+          Commencer maintenant
+        </ModernButton>
+        <ModernButton 
+          variant="outline"
+          onClick={() => router.push('/templates')}
+        >
+          Explorer les modèles
+        </ModernButton>
+      </div>
     </motion.div>
   )
 
@@ -97,12 +99,7 @@ export default function HomePage() {
               >
                 Modèles
               </Link>
-              <Link 
-                href="/ab-testing" 
-                className={`${designTokens.colors.textSecondary} hover:${designTokens.colors.textPrimary} transition-colors font-medium`}
-              >
-                A/B Testing
-              </Link>
+              {/* Lien A/B Testing supprimé */}
               <Link 
                 href="/settings" 
                 className={`${designTokens.colors.textSecondary} hover:${designTokens.colors.textPrimary} transition-colors font-medium`}

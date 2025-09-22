@@ -5,18 +5,33 @@
 
 @layer base {
   :root {
-    /* Dark theme colors matching the design system */
-    --background: #0B0C0E;
-    --surface: #111316;
-    --panel: #14171B;
-    --border: #262A2F;
-    --accent: #0A84FF;
-    --success: #34C759;
-    --warning: #FFD60A;
-    --danger: #FF453A;
-    --text-primary: #FFFFFF;
-    --text-secondary: #8E8E93;
-    --text-muted: #636366;
+    /* Light theme (default) - HSL values */
+    --background: 210 40% 98%; /* #F8FAFF approx */
+    --surface: 0 0% 100%;
+    --panel: 210 40% 96%;
+    --border: 214 32% 91%;
+    --accent: 217 91% 60%;
+    --success: 142 72% 45%;
+    --warning: 45 93% 47%;
+    --danger: 0 84% 60%;
+    --text-primary: 224 71% 4%;
+    --text-secondary: 220 8% 46%;
+    --text-muted: 220 9% 55%;
+  }
+
+  .dark {
+    /* Dark theme */
+    --background: 220 10% 5%; /* #0B0C0E */
+    --surface: 220 8% 8%; /* #111316 */
+    --panel: 220 10% 10%; /* #14171B */
+    --border: 220 9% 18%; /* #262A2F */
+    --accent: 217 91% 60%; /* same blue */
+    --success: 142 72% 45%;
+    --warning: 45 93% 47%;
+    --danger: 0 84% 60%;
+    --text-primary: 0 0% 100%;
+    --text-secondary: 240 5% 65%;
+    --text-muted: 240 4% 50%;
   }
 
   * {

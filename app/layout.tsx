@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import '@/styles/globals.css'
-import { ReactQueryProvider } from '@/components/ReactQueryProvider'
 import { Navigation } from '@/components/Navigation'
+import Providers from '@/components/Providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr" className="dark">
+    <html lang="fr" suppressHydrationWarning>
       <body className={inter.className}>
-        <ReactQueryProvider>
+        <Providers>
           <Navigation />
           <main>
             {children}
           </main>
-        </ReactQueryProvider>
+        </Providers>
       </body>
     </html>
   )
