@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@300;400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark theme colors matching the design system */
+    --background: #0B0C0E;
+    --surface: #111316;
+    --panel: #14171B;
+    --border: #262A2F;
+    --accent: #0A84FF;
+    --success: #34C759;
+    --warning: #FFD60A;
+    --danger: #FF453A;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E93;
+    --text-muted: #636366;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-text-primary font-sans;
+    font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-600 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500;
+  }
+
+  /* Focus styles */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  /* Selection styles */
+  ::selection {
+    @apply bg-accent/30 text-white;
+  }
+}
+
+@layer components {
+  /* Card styles */
+  .card {
+    @apply bg-surface border border-border rounded-2xl p-6;
+  }
+
+  .card-hover {
+    @apply transition-all duration-160 hover:bg-surface/80 hover:border-border/80 hover:shadow-lg;
+  }
+
+  /* Button variants */
+  .btn-primary {
+    @apply bg-accent text-white hover:bg-accent/90 focus-ring;
+  }
+
+  .btn-secondary {
+    @apply bg-surface border border-border hover:bg-panel focus-ring;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-surface/50 focus-ring;
+  }
+
+  /* Input styles */
+  .input {
+    @apply bg-surface border border-border rounded-xl px-4 py-3 focus-ring transition-colors;
+  }
+
+  /* Text styles */
+  .text-primary {
+    @apply text-text-primary;
+  }
+
+  .text-secondary {
+    @apply text-text-secondary;
+  }
+
+  .text-muted {
+    @apply text-text-muted;
+  }
+
+  /* Animation presets */
+  .animate-in {
+    animation: slideInUp 0.2s ease-out;
+  }
+
+  .animate-out {
+    animation: slideOutDown 0.2s ease-in;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-surface/80 backdrop-blur-xl border border-border/50;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* Rich editor specific styles */
+.ProseMirror {
+  @apply focus:outline-none;
+}
+
+.ProseMirror h1 {
+  @apply text-2xl font-semibold mb-4;
+}
+
+.ProseMirror h2 {
+  @apply text-xl font-semibold mb-3;
+}
+
+.ProseMirror h3 {
+  @apply text-lg font-semibold mb-2;
+}
+
+.ProseMirror p {
+  @apply mb-3 leading-relaxed;
+}
+
+.ProseMirror ul {
+  @apply list-disc ml-6 mb-4;
+}
+
+.ProseMirror ol {
+  @apply list-decimal ml-6 mb-4;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-accent pl-4 py-2 my-4 bg-surface/50 rounded-r-lg;
+}
+
+.ProseMirror code {
+  @apply bg-surface px-2 py-1 rounded font-mono text-sm;
+}
