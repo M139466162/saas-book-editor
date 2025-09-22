@@ -12,11 +12,11 @@ export function Navigation() {
   const { data: session } = useSession()
 
   return (
-    <nav className="bg-surface border-b border-border">
+    <nav className="sticky top-0 z-40 bg-surface/80 backdrop-blur-xl border-b border-border/60">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-accent rounded-lg flex items-center justify-center shadow-sm">
               <Book className="w-5 h-5 text-white" />
             </div>
             <span className="text-xl font-semibold text-foreground">MindScribe Pro</span>

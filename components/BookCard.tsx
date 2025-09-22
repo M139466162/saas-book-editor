@@ -3,7 +3,8 @@
 import { Book } from '@/lib/types'
 import { Card } from '@/components/ui/Card'
 import { formatDate } from '@/lib/utils'
-import { Calendar, BookOpen, TrendingUp } from 'lucide-react'
+import { Calendar, BookOpen, TrendingUp, Image as ImageIcon } from 'lucide-react'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 
 interface BookCardProps {
@@ -27,6 +28,27 @@ export function BookCard({ book, onClick }: BookCardProps) {
         className="cursor-pointer group relative overflow-hidden"
         onClick={onClick}
       >
+        {/* Cover area */}
+        <div className="relative h-32 rounded-xl mb-4 overflow-hidden bg-panel">
+          {book.coverUrl ? (
+            <Image
+              src={book.coverUrl}
+              alt={book.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/15 via-transparent to-accent/5" />
+              <div className="absolute inset-0 flex items-center justify-center text-text-muted">
+                <ImageIcon className="w-7 h-7 opacity-60" />
+              </div>
+            </>
+          )}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-black/10" />
+        </div>
+
         <div className="flex flex-col h-full">
           <div className="flex-1">
             <div className="flex items-start justify-between mb-3">
@@ -63,7 +85,7 @@ export function BookCard({ book, onClick }: BookCardProps) {
           
           <div className="mt-auto">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-xs text-text-muted">Progress</span>
+              <span className="text-xs text-text-muted">Progression</span>
               <span className="text-xs font-medium">{progress}%</span>
             </div>
             <div className="w-full bg-panel rounded-full h-1.5">
@@ -75,8 +97,8 @@ export function BookCard({ book, onClick }: BookCardProps) {
           </div>
           
           {progress === 100 && (
-            <div className="absolute top-3 right-3 bg-success text-white text-xs px-2 py-1 rounded-full">
-              Complete
+            <div className="absolute top-3 right-3 bg-success text-white text-xs px-2 py-1 rounded-full shadow-sm">
+              Terminé
             </div>
           )}
         </div>

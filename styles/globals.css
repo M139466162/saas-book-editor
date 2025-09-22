@@ -130,6 +130,12 @@
   .glass {
     @apply bg-surface/80 backdrop-blur-xl border border-border/50;
   }
+
+  /* Subtle grid background */
+  .bg-grid {
+    background-image: linear-gradient(to right, hsl(var(--border)/0.3) 1px, transparent 1px), linear-gradient(to bottom, hsl(var(--border)/0.3) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 }
 
 @keyframes slideInUp {
@@ -189,4 +195,9 @@
 
 .ProseMirror code {
   @apply bg-surface px-2 py-1 rounded font-mono text-sm;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
