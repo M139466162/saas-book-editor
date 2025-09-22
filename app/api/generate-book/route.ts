@@ -26,8 +26,15 @@ export async function POST(request: NextRequest) {
   try {
     const { title, description, template, apiKey, sunraApiKey } = await request.json();
     
-    if (!title || !apiKey) {
-      return NextResponse.json({ error: 'Title and OpenRouter API key are required' }, { status: 400 });
+    if (!title) {
+      return NextResponse.json({ error: 'Title is required' }, { status: 400 });
+    }
+
+    if (!apiKey || apiKey.trim() === '') {
+      return NextResponse.json({ 
+        error: 'OpenRouter API key is required for AI generation', 
+        details: 'Please configure your OpenRouter API key in Settings to enable AI-powered book generation.'
+      }, { status: 400 });
     }
 
     console.log('📚 Generating complete book:', title);
@@ -87,7 +94,20 @@ export async function POST(request: NextRequest) {
     });
 
     if (!outlineResponse.ok) {
-      throw new Error(`OpenRouter API error: ${outlineResponse.statusText}`);
+      const errorText = await outlineResponse.text();
+      console.error('OpenRouter API error:', outlineResponse.status, errorText);
+      
+      if (outlineResponse.status === 401) {
+        return NextResponse.json({ 
+          error: 'Invalid OpenRouter API key', 
+          details: 'Please check your OpenRouter API key in Settings. Make sure it starts with "sk-or-v1-".'
+        }, { status: 400 });
+      }
+      
+      return NextResponse.json({ 
+        error: `OpenRouter API error: ${outlineResponse.statusText}`,
+        details: errorText
+      }, { status: 500 });
     }
 
     const outlineData = await outlineResponse.json();

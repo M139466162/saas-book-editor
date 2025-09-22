@@ -94,7 +94,8 @@ export function QuickBookGenerator({
         })
 
         if (!response.ok) {
-          throw new Error('Failed to generate book')
+          const errorData = await response.json().catch(() => ({}))
+          throw new Error(errorData.details || errorData.error || 'Failed to generate book')
         }
 
         const { book } = await response.json()
@@ -144,7 +145,7 @@ export function QuickBookGenerator({
 
     } catch (error) {
       console.error('Book creation error:', error)
-      setCurrentStep('❌ Creation failed. Please try again.')
+      setCurrentStep(`❌ ${error instanceof Error ? error.message : 'Creation failed. Please try again.'}`)
     }
   }
 
@@ -311,8 +312,8 @@ export function QuickBookGenerator({
 
           {generateContent && !openRouterApiKey && (
             <div className="p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
-              <p className="text-sm text-yellow-400">
-                Configure your OpenRouter API key in Settings to enable AI generation.
+              <p className="text-sm text-yellow-600 dark:text-yellow-400">
+                Configure your OpenRouter API key in Paramètres to enable AI generation.
               </p>
             </div>
           )}
